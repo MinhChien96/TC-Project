@@ -1,1 +1,1 @@
-create database Quiz
+CREATE DATABASE Quiz CHARACTER SET utf8 COLLATE utf8_general_ci;
