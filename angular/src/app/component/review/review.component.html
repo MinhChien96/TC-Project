@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8">
+      <div>
+        <h3 style="float:left">?? Quiz</h3>
+        <h3 style="float:right">Point: {{traLoiDung}} out of 25</h3>
+      </div>
+      <div style="clear:both" *ngFor="let item of traLois">
+        <div>câu hỏi {{item.maCauhoi}}</div>
+        <div>Your anwser:
+          <span style="color: red">{{item.dung}}</span>
+        </div>
+        <div>{{item.thoiGian | timeClock }}</div>
+        <hr>
+      </div>
+      <div>
+        <h4>
+          <b>
+            <div style="float: left">By TC Sysems (VietNam)</div>
+            <div style="float: right">Time spent: {{result[0] | timeClock}}</div>
+          </b>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>

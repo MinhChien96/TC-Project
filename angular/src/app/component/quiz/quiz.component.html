@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8">
+      <h4>
+        <div style="float:left;">
+          <span class="glyphicon glyphicon-question-sign" style="color:#5bc0de; font-size: 25px"></span>
+          <b style="font-size: 30px">{{indexCauhoi}}</b> / 20</div>
+        <div style="float:right">
+          <span class="glyphicon glyphicon-time" style="color:#5bc0de; font-size: 25px"></span>
+          <b style="font-size: 30px">{{tongThoiGian | timeClock}}</b> / 20:00
+        </div>
+      </h4>
+      <div class="panel panel-default" style="clear:both; margin-top: 50px">
+        <div class="panel-heading">
+          <h4>
+            <b>{{indexCauhoi}}. This is content of question?</b>
+          </h4>
+        </div>
+        <div class="panel-body">
+          <div *ngFor="let item of dapAnTheoMoiCau">
+
+            <label for="item_{{item.noidung}}">
+              <h4>
+                <input id="item_{{item.noidung}}" type="radio" name="noidung" [value]="item" [(ngModel)]="radioSelected"> {{item.noidung}}</h4>
+            </label>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <button type="button" (click)="nextQuiz(20)" class="btn btn-info" [routerLink]="resultC">
+            <h4> Next</h4>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
