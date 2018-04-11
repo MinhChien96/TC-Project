@@ -9,8 +9,11 @@ import { ResultComponent } from './component/result/result.component';
 import { ReviewComponent } from './component/review/review.component';
 import { TimeClock } from './pipe/timeClock';
 import { QuizService } from './service/quiz.service';
-import {FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './/app-routing.module';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @NgModule({
   declarations: [
@@ -23,10 +26,11 @@ import { RouterModule, Routes } from '@angular/router';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
-    [RouterModule]
+    HttpModule
   ],
-  providers: [QuizService],
+  providers: [QuizService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
