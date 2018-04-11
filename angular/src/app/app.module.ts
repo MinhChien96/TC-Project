@@ -9,7 +9,8 @@ import { ResultComponent } from './component/result/result.component';
 import { ReviewComponent } from './component/review/review.component';
 import { TimeClock } from './pipe/timeClock';
 import { QuizService } from './service/quiz.service';
-
+import {FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { QuizService } from './service/quiz.service';
     TimeClock
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    [RouterModule]
   ],
   providers: [QuizService],
   bootstrap: [AppComponent]
