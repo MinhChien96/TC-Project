@@ -1,3 +1,5 @@
+//routes định hướng cho app
+
 const userController = require('../api/controllers/userController');
 const siteController = require('../api/controllers/homePage');
 
