@@ -19,3 +19,9 @@ CREATE TABLE anwser(
     idquestion int not null,
     FOREIGN KEY (idquestion) REFERENCES question(idquestion)
 )
+CREATE TABLE account(
+	idacc int PRIMARY KEY AUTO_INCREMENT,
+    username varchar(50),
+    password varchar(50),
+    level varchar(10)
+)
