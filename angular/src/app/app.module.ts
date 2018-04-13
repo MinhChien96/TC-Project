@@ -13,6 +13,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CookieService } from 'ngx-cookie-service';
     QuizComponent,
     ResultComponent,
     ReviewComponent,
-    TimeClock
+    TimeClock,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
