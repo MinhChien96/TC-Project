@@ -48,3 +48,6 @@ button:hover {
     height: 100px;
     background-color: gray;
 }
+label{
+    color: white;
+}
