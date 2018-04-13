@@ -4,17 +4,17 @@
         <img src="http://www.tc-systems.net/wp-content/uploads/2017/04/logo-white-text-1.png" style="width:425px;">
     </div>
   </div>
-  <form class="form-login" >
+  <form class="form-login" #formSignIn="ngForm" (submit)="login(formSignIn)">
     <div class="frm-content">
       <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <input type="text" placeholder="Enter Username" name="userName" [(ngModel)]="userName" required>
 
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" placeholder="Enter Password" name="passWord" [(ngModel)]="passWord" required>
         
-      <button type="submit">Login</button>
+      <button [disabled]='formSignIn.invalid'>Login</button>
       <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
+        <input type="checkbox" checked="checked" name="remember" [ngModel]="true" name ="remember"> Remember me
       </label>
     </div>
   </form>

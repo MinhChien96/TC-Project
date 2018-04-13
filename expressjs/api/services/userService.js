@@ -3,6 +3,6 @@
 const db = require("../entities");
 
 
-exports.create = function(user,res){
-
+exports.findByUserName = function(userName,callback){
+    return db.query('select * from account where username = "' + userName +'"',callback);
 } 

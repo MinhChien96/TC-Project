@@ -10,7 +10,7 @@ exports.initRoutes = function(app,express){
 
     var userRoutes = express.Router();
     apiRoutes.use('/user',userRoutes);
-    userRoutes.post('/create',userController.create);
+    userRoutes.post('/login',userController.login);
 
 
     // Set url for API group routes
