@@ -3,6 +3,8 @@
 const db = require("../entities");
 
 
-exports.findByUserName = function(userName,callback){
-    return db.query('select * from account where username = "' + userName +'"',callback);
+exports.findByUserName = function(userName){
+    return db.Account.findAll({
+        where:{username: userName}
+    });
 } 

@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 //middware để nhận dữ liệu từ body req, có cái này mới sử dụng ddc req.body
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(morgan('dev'));//log mọi request
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -28,8 +28,6 @@ app.use((req, res, next) => {
 
 
 routes.initRoutes(app, express);//routes
-
-app.use(morgan('dev'));//log mọi request
 
 
 var port = process.env.PORT || 3000;
