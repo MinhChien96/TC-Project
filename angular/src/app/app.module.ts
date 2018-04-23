@@ -14,6 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './login/login.component';
 import { LoginService} from './service/login.service';
+import {AuthGuardService} from './auth/auth-guard.service';
+import {AuthService} from './auth/auth.service';
+import {IQuizService} from './auth/isQuiz.service';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +36,7 @@ import { LoginService} from './service/login.service';
     HttpModule,
     ReactiveFormsModule,
   ],
-  providers: [QuizService, CookieService, LoginService],
+  providers: [QuizService, CookieService, LoginService, AuthService, AuthGuardService, IQuizService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

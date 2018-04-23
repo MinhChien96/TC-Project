@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router'
+
 
 @Component({
   selector: 'app-result',
@@ -8,11 +10,12 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ResultComponent implements OnInit {
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService,private routes: Router) { }
 
   timeSpent:number;
   result:number;
   getData() {
+    //let test = this.cookieService.get('result');
     this.result = JSON.parse(this.cookieService.get('result')).point;
     this.timeSpent = JSON.parse(this.cookieService.get('result')).timeSpent;
 
@@ -32,4 +35,8 @@ export class ResultComponent implements OnInit {
     this.getData();
   }
 
+  logout(){
+    this.cookieService.deleteAll();
+    this.routes.navigate(["login"]);
+  }
 }
