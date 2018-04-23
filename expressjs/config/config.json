@@ -2,11 +2,16 @@
   "development": {
     "username": "root",
     "password": "chien8496",
-    "database": "quizTest",
+    "database": "quiz",
     "host": "localhost",
     "port": "3306",
     "dialect": "mysql",
-    "logging": true
+    "logging": true,
+    "pool": {
+      "max":"5",
+      "idle": "300000",
+      "acquire": "600000"
+    }
   },
   "test": {
     "dialect": "sqlite",

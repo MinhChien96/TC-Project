@@ -10,21 +10,18 @@ export class ResultComponent implements OnInit {
 
   constructor(private cookieService: CookieService) { }
 
-  result: any;
-  hienthi: string;
-  traLoiDung: number = 0;
-  traLois = new Array();
-
+  result:number;
   getData() {
-    this.result = JSON.parse(this.cookieService.get('result'));
+    this.result = JSON.parse(this.cookieService.get('result')).data;
+    //console.log(this.result);
 
-    this.traLois = JSON.parse(this.result[1]);
+    // this.traLois = JSON.parse(this.result[1]);
 
-    for (let i = 0; i < this.traLois.length; i++) {
-      if (this.traLois[i].dung === true) {
-        this.traLoiDung++;
-      }
-    }
+    // for (let i = 0; i < this.traLois.length; i++) {
+    //   if (this.traLois[i].dung === true) {
+    //     this.traLoiDung++;
+    //   }
+    // }
 
   }
 

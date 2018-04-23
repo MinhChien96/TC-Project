@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../service/quiz.service';
-import { CookieService } from 'ngx-cookie-service';
-
+import { CookieService } from 'ngx-cookie-service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-quiz',
@@ -11,113 +11,64 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class QuizComponent implements OnInit {
 
-  //cái này để hiển thị từng câu hỏi
-  cauhoi: number;
+  constructor(private quizService: QuizService, private cookieService: CookieService, private routes: Router) { }
+  arrQues = [];
+  idNumQues = 1;
+  timeSpent = 0;
+  ques: any = "";
+  selectAnwser = "";
+  arrAnwser = [];
 
-  //trước mắt lấy mã câu hỏi từ chung 1 bảng của bảng dapan
-  maCauHoi = new Array();
-
-  //lấy từ server về
-  tatCaDapAn = new Array();
-
-  //mảng chưa các đáp án của 1 câu hỏi
-  dapAnTheoMoiCau = new Array();
-
-  tongThoiGian: number = 0;
-  thoiGianBatDau: number = 0;
-  thoiGianKetThuc: number = 0;
-
-
-
-  constructor(private quizService: QuizService, private cookieService: CookieService) { }
-
-  getDapAn() {
-    this.radioSelected = {
-      ma: 0,
-      noidung: '',
-      dung: false,
-      maCauhoi: 0
-    }
-    this.dapAnTheoMoiCau = [];
-    for (let j = 0; j < this.tatCaDapAn.length; j++) {
-      if (this.tatCaDapAn[j].maCauhoi === this.cauhoi) {
-        this.dapAnTheoMoiCau.push(this.tatCaDapAn[j]);
-      }
-    }
-    this.indexCauhoi++;
-  }
-
-  getAllQuiz() {
-    this.quizService.getQuiz()
-      .subscribe(data => {
-        this.tatCaDapAn = data;
-
-        // for (let i = 0; i < this.tatCaDapAn.length; i++) {
-        //   this.tatCaDapAn[i].dung = true;
-        //   this.quizService.updateQuiz(i, this.tatCaDapAn[i])
-        //     .subscribe(() => console.log('ok'));
-        // }
-        // add mã câu hỏi
-        for (let i = 0; i < this.tatCaDapAn.length; i++) {
-          if (!this.maCauHoi.includes(this.tatCaDapAn[i].maCauhoi)) {
-            this.maCauHoi.push(this.tatCaDapAn[i].maCauhoi);
-          }
+  async getAllQues() {
+    try {
+     var result = await this.quizService.getAll();
+       //console.log(result);
+        if (!result.success) {
+          alert('Connot get question, sever is busy...');
+          return;
         }
-        this.cauhoi = this.maCauHoi[0];
-        //add đáp án
-        this.getDapAn();
-
-        setInterval(() => {
-          this.tongThoiGian++;
-        }, 1000);
-      });
-  }
-  radioSelected = {
-    ma: 0,
-    noidung: '',
-    dung: false,
-    maCauhoi: 0
-  }
-
-  indexCauhoi: number = 0;
-
-  //property object 
-  ma = 0;
-  dung = false;
-  thoiGian = 0;
-
-  traLois = new Array();
-  resultC = '';
-
-  nextQuiz(soluongcauhoi: number) {
-    //alert(this.maCauHoi);
-    this.thoiGianBatDau = this.thoiGianKetThuc
-    this.thoiGianKetThuc = this.tongThoiGian;
-
-    //console.log(this.radioSelected);
-    //set obj
-    this.ma = this.cauhoi;
-    this.dung = this.radioSelected.dung;
-    this.thoiGian = this.tongThoiGian - this.thoiGianBatDau;
-
-    this.cauhoi = this.maCauHoi[this.indexCauhoi];
-    this.getDapAn();
-
-    this.traLois.push(new Object({ maCauhoi: this.ma, dung: this.dung, thoiGian: this.thoiGian }));
-
-    if (this.traLois.length == soluongcauhoi - 1) {
-      this.resultC = '/result';
-      //hoặc sử dụng router.navigateByUrl('path defined in route config')
-    }
-
-
-    if (this.traLois.length === soluongcauhoi) {
-      let setCookie: [number, string] = [this.tongThoiGian, JSON.stringify(this.traLois)];
-      this.cookieService.set('result', JSON.stringify(setCookie), Date.now() + 86400000);
+        this.arrQues = result.data;
+      //console.log(this.arrQues);
+    } catch (error) {
+      alert('Cannot connect to server....');
+      console.log(error);
     }
   }
 
-  ngOnInit() {
-    this.getAllQuiz();
+  async ngOnInit() {
+    await this.getAllQues();
+    this.ques = this.arrQues.shift();
+    //console.log(this.ques)
+    setInterval(() => {
+      if (this.timeSpent >= 1200) {
+        //time out do something
+        this.checkResult();
+      }
+      this.timeSpent++;
+    }, 1000);
+  }
+  nextQuiz() {
+    //alert(this.selectAnwser);
+    if (this.arrQues.length != 0) {
+      this.arrAnwser.push({ idquestion: this.ques.idquestion, idanwser: this.selectAnwser });
+      this.ques = this.arrQues.shift();
+      this.idNumQues++;
+    }
+    else {
+      this.checkResult();
+    }
+    this.selectAnwser = "";
+  }
+  async checkResult() {
+    try {
+      //console.log(this.arrAnwser);alert("waiting");
+      this.cookieService.set('arrAnwser', JSON.stringify(this.arrAnwser), Date.now() + 86400000);
+      let result = await this.quizService.checkResult(this.arrAnwser);
+      //console.log(JSON.stringify(result));
+      this.cookieService.set('result', JSON.stringify(result), Date.now() + 86400000);
+      this.routes.navigate(["/result"]);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

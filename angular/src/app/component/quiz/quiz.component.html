@@ -6,30 +6,60 @@
       <h4>
         <div style="float:left;">
           <span class="glyphicon glyphicon-question-sign" style="color:#5bc0de; font-size: 25px"></span>
-          <b style="font-size: 30px">{{indexCauhoi}}</b> / 20</div>
+          <b style="font-size: 30px">{{idNumQues}}</b> / 20</div>
         <div style="float:right">
           <span class="glyphicon glyphicon-time" style="color:#5bc0de; font-size: 25px"></span>
-          <b style="font-size: 30px">{{tongThoiGian | timeClock}}</b> / 20:00
+          <b style="font-size: 30px">{{timeSpent | timeClock}}</b> / 20:00
         </div>
       </h4>
-      <div class="panel panel-default" style="clear:both; margin-top: 50px">
+      <div class="panel panel-default" style="clear:both; margin-top: 50px" *ngIf="ques.type=='doc'">
         <div class="panel-heading">
           <h4>
-            <b>{{indexCauhoi}}. This is content of question?</b>
+            <b>{{idNumQues + '. '+ ques.content}}</b>
           </h4>
         </div>
         <div class="panel-body">
-          <div *ngFor="let item of dapAnTheoMoiCau">
+          <div *ngFor="let item of ques.anwsers">
 
-            <label for="item_{{item.noidung}}">
+            <label for="item_{{item.content}}">
               <h4>
-                <input id="item_{{item.noidung}}" type="radio" name="noidung" [value]="item" [(ngModel)]="radioSelected"> {{item.noidung}}
+                <input id="item_{{item.content}}" type="radio" name="contentAnwser" [value]="item.idanwser" [(ngModel)]="selectAnwser">{{item.content}}
               </h4>
             </label>
           </div>
         </div>
         <div class="panel-footer">
-          <button type="button" (click)="nextQuiz(20)" class="btn btn-info" [routerLink]="resultC">
+          <button type="button" (click)="nextQuiz()" class="btn btn-info">
+            <!--[routerLink]="resultC">*\-->
+            <h4> Next</h4>
+          </button>
+        </div>
+      </div>
+
+      <div class="panel panel-default" style="clear:both; margin-top: 50px" *ngIf="ques.type=='img'||ques.type=='imgdoc'">
+        <div class="panel-heading" style="max-height: 400px;margin: 0px">
+          <img [src]="ques.content" alt="" style="height: auto;width: 837.33px;max-height: 400px">
+        </div>
+        <div class="panel-body" style="max-height: 300px" *ngIf="ques.type=='img'">
+          <tr style="max-width: 860px;">
+            <td *ngFor="let item of ques.anwsers" style="padding-left: 30px">
+              <input type="radio" [value]="item.idanwser" [(ngModel)]="selectAnwser">
+              <img [src]='item.content' alt="" style="width: 138px;height: auto;">
+            </td>
+          </tr>
+        </div>
+        <div class="panel-body" *ngIf="ques.type=='imgdoc'">
+          <div *ngFor="let item of ques.anwsers">
+            <label for="item_{{item.content}}">
+              <h4>
+                <input id="item_{{item.content}}" type="radio" name="contentAnwser" [value]="item.idanwser" [(ngModel)]="selectAnwser">{{item.content}}
+              </h4>
+            </label>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <button type="button" (click)="nextQuiz()" class="btn btn-info">
+            <!--[routerLink]="resultC">*\-->
             <h4> Next</h4>
           </button>
         </div>

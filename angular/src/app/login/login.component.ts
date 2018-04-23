@@ -28,15 +28,21 @@ export class LoginComponent implements OnInit {
   //   this.userName = "";
   // }
   async login(formSignIn) {
-    let  result = await this.loginService.login(formSignIn.value.userName, formSignIn.value.passWord);
-    //console.log(result);
-      if (result) {
-        this.router.navigate(["/quiz"]);
-      }
-      else {
-        alert("Login fail");
-      }
-    this.passWord = "";
-    this.userName = "";
+    try{
+      let result = await this.loginService.login(formSignIn.value.userName, formSignIn.value.passWord);
+      //console.log(result.json());
+        if (result) {
+          this.router.navigate(["/quiz"]);
+        }
+        else {
+          alert("Login fail");
+        }
+      this.passWord = "";
+      this.userName = "";
+    }
+    catch(err){
+      alert('Cannot connect...');
+      console.log(err);
+    }
   }
 }

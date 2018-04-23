@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    var Subject = sequelize.define('subject', {
+    var subject = sequelize.define('subject', {
         idsub: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -10,19 +10,23 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {
-        // freezeTableName: true,
+        freezeTableName: true,
+        timestamps: false,
         // classMethods: {
         //     associate(models) { // eslint-disable-line no-unused-vars
         //         // associations can be defined here
-        //         // models.Subject.hasMany(models.Question, {
-        //         //     foreignKey: 'idsub',
-        //         //     sourceKey: 'idsub'
-        //         // });
+        //         Subject.hasMany(models.Question, {
+        //             foreignKey: 'idsub',
+        //             sourceKey: 'idsub'
+        //         });
         //     },
         // }
     });
-    // Subject.associate = function (models) {
-    //     models.Subject.hasMany(models.Question,{foreignKey: 'idsub', sourceKey: 'idsub'});
-    // };
-    return Subject;
+    subject.associate = function (models) {
+        subject.hasMany(models.question, {
+            foreignKey: 'idsub',
+            sourceKey: 'idsub'
+        });
+    };
+    return subject;
 }
