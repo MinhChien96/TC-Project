@@ -10,9 +10,12 @@ export class ResultComponent implements OnInit {
 
   constructor(private cookieService: CookieService) { }
 
+  timeSpent:number;
   result:number;
   getData() {
-    this.result = JSON.parse(this.cookieService.get('result')).data;
+    this.result = JSON.parse(this.cookieService.get('result')).point;
+    this.timeSpent = JSON.parse(this.cookieService.get('result')).timeSpent;
+
     //console.log(this.result);
 
     // this.traLois = JSON.parse(this.result[1]);

@@ -65,7 +65,8 @@ export class QuizComponent implements OnInit {
       this.cookieService.set('arrAnwser', JSON.stringify(this.arrAnwser), Date.now() + 86400000);
       let result = await this.quizService.checkResult(this.arrAnwser);
       //console.log(JSON.stringify(result));
-      this.cookieService.set('result', JSON.stringify(result), Date.now() + 86400000);
+      let value = {point:result.data,timeSpent:this.timeSpent};
+      this.cookieService.set('result', JSON.stringify(value), Date.now() + 86400000);
       this.routes.navigate(["/result"]);
     } catch (error) {
       console.log(error);
