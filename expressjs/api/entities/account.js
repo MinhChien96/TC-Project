@@ -33,7 +33,23 @@ module.exports = (sequelize, DataTypes) => {
         islogin:{
             type:DataTypes.INTEGER,
             defaultValue: 0
-        }
+        },
+        point:{
+            type:DataTypes.INTEGER,
+            defaultValue: -1,
+        },
+        timespent:{
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+        },
+        cv:{
+            type:DataTypes.STRING
+        },
+        note: DataTypes.STRING,
+        email:{
+            type:DataTypes.STRING
+        },
+        phone: DataTypes.STRING,
     },{freezeTableName: true,timestamps: false});
 
     account.beforeCreate((account, options) => {

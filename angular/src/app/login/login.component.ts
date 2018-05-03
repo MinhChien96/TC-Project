@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../service/login.service'
 import { Router } from '@angular/router'
+import {CookieService} from 'ngx-cookie-service'
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   passWord = "";
   userName = "";
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router,private cookieService: CookieService) { }
   ngOnInit() {
   }
 
@@ -31,9 +33,11 @@ export class LoginComponent implements OnInit {
     try{
       let result = await this.loginService.login(formSignIn.value.userName, formSignIn.value.passWord);
       //console.log(result.json());
-        if (result) {
-          this.router.navigate(["/quiz"]);
+        if (result=="user") {
+          if(this.cookieService.get('result')!='') this.router.navigate(["/result"]);
+          else this.router.navigate(["/quiz"]);
         }
+        else if(result=="admin")this.router.navigate(["/admin"]);
         else {
           alert("Login fail");
         }

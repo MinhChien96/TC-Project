@@ -59,4 +59,8 @@ export class QuizService {
     // console.log(res.json());
     return res.json();
   }
+  async getAllInter(){
+    let res = await this.http.get('http://localhost:3000/api/user/' ,{ headers: this.headers }).toPromise();
+    return res.json();
+  }
 }

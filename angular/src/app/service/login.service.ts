@@ -20,7 +20,9 @@ export class LoginService {
       let result = res.json();
       if(result.success){
         this.cookieService.set('token',result.data.token,result.data.exp);
-        return true;
+        if(result.data.point!=-1)
+        this.cookieService.set('result',JSON.stringify({point:result.data.point,timeSpent:result.data.timespent}));
+        return result.data.level;
       }
     } catch (error) {
       console.log(error);

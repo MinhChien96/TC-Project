@@ -1,0 +1,41 @@
+<!-- <h1> Result Quiz</h1>k -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Result Quiz</h4>
+          <!-- <p class="category">Here is a subtitle for this table</p> -->
+        </div>
+        <div class="content table-responsive table-full-width">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th></th>
+                <th *ngFor="let cell of titleTable">{{ cell }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of tableData">
+                <td>
+                  <input type="checkbox" (click)="select(row['idacc'])">
+                </td>
+                <td *ngFor="let cell of row | keys">{{cell!='timespent' ? row[cell] : timeClock(row[cell])}}</td>
+                <!-- <td>
+                                 <button class="ti-pencil"></button>
+                                 <button class="ti-save"></button>
+                              </td> -->
+                <td><button class='ti-clipboard' (click)="detailUser(row.idacc)"></button></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="ti-trash" (click)="delete()"></button>
+  <button class="ti-reload" (click)="reload()"></button>
+</div>
+
+

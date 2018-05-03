@@ -11,16 +11,23 @@ exports.findByUserName = function (userName) {
     });
 }
 
-exports.findById = function (id) {
+exports.findById = function (id) {//dành cho xác thực
     return db.account.findOne({
         where:{ idacc: id},
         attributes:['idacc','username','password','level','islogin']
     });
 }
 
+exports.findById1 = function (id) {//dành cho font end, detail user
+    return db.account.findOne({
+        where:{ idacc: id}
+    });
+}
+
 exports.findAll = ()=>{
     return db.account.findAll({
-        attributes:['idacc','username','password']
+        attributes:['idacc','name','birth','adress','gender','point','timespent','cv','note'],
+        where:{level : 'user'}
     });
 }
 
@@ -38,8 +45,8 @@ exports.create = async (user,res)=>{
         response = {success: false,message: err};
         res.json(response);return;
     });
-    await db.account.build(user).save().then(()=>{
-        response = {success: true,message: "Create user success"};
+    await db.account.build(user).save().then((us)=>{
+        response = {success: true,message: "Create user success",data:us.idacc};
         res.json(response);
     }).catch(err=>{
         response = {success: false,message: err};
@@ -65,4 +72,39 @@ exports.updateLogin = (id,isLogin)=>{
             return Promise.reject(false);
         }
     })
+}
+
+exports.update = async (user,res)=>{
+    try {
+        let acc = await db.account.findOne({where:{idacc:user.idacc}});
+        if(acc){
+            acc.username = user.username;
+            acc.password = user.password;
+            acc.email = user.email;
+            acc.phone = user.phone;
+            acc.note = user.note;
+            acc.cv = user.cv;
+            acc.gender = user.gender;
+            acc.adress = user.adress;
+            acc.birth = user.birth;
+            acc.name = user.name;
+            return acc.save().then((r)=>{
+                res.json({success:true,data:r.idacc});
+            })                 
+        }
+    } catch (error) {
+        return res.json({success:false,message:"Cannot update"});
+    }
+}
+exports.delete = async (arrID,res)=>{
+    try {
+        for(let i = 0;i<arrID.length;i++){
+            await db.account.destroy({
+                where:{idacc:arrID[i]}
+            });
+        }
+        res.json({success:true});
+    } catch (error) {
+        res.json({success:false,message:"Cannot delete"});
+    }
 }

@@ -4,24 +4,29 @@ const requiredAuth = passport.authenticate('jwt', {
 });
 //routes định hướng cho app
 
-
 const userController = require('../api/controllers/userController');
 const siteController = require('../api/controllers/homePage');
 const questionController = require('../api/controllers/questionController');
 const auth = require('../api/middleware/auth');
 
-exports.initRoutes = function (app, express) {
+exports.initRoutes = function (app, express,upload) {
     app.get('/', siteController.index);
 
     const apiRoutes = express.Router();
 
     //user routes
     var userRoutes = express.Router();
+    userRoutes.get('/getcv/:filename',userController.getCv);
     apiRoutes.use('/user', userRoutes);
     userRoutes.post('/login', userController.login);
-    userRoutes.get('/', [requiredAuth, auth.isAmin], userController.getAllUser) //get all user - admin
-    userRoutes.post('/signup', userController.signup);
-    userRoutes.post('/logout', userController.logout);
+    userRoutes.get('/:id', [requiredAuth, auth.isAmin], userController.getUserById);
+    userRoutes.get('/', [requiredAuth, auth.isAmin], userController.getAllUser); //get all user - admin
+    userRoutes.post('/signup',[requiredAuth, auth.isAmin],userController.signup);
+    userRoutes.post('/logout',requiredAuth, userController.logout);
+    userRoutes.post('/upload',[requiredAuth, auth.isAmin],upload.array("uploads[]", 12),userController.upload);
+    // userRoutes.get('/getcv/:filename',userController.getCv);
+    userRoutes.post('/update',[requiredAuth, auth.isAmin],userController.update);
+    userRoutes.post('/delete',[requiredAuth, auth.isAmin],userController.delete);
 
     //question
     var questionRouters = express.Router();

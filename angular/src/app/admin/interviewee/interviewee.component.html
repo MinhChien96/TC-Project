@@ -1,0 +1,150 @@
+<div class="container-fluid">
+  <div class="row" style="margin-bottom: 28px;">
+    <div class="col-lg-12 col-md-12">
+      <div class="col-lg-10"></div>
+      <div class="col-lg-2 center">
+        <button class="btn btn-info btn-fill btn-wd" style="background-color: gray;" (click)="back()">Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-7 col-md-7">
+      <div class="card card-user">
+        <!-- <object data="assets/img/Fresher PHP.pdf#page=1" type="application/pdf" width="100%" height="450px">
+                <p><b>Example fallback content</b>: This browser does not support PDFs. Please download the PDF to view it: <a href="/pdf/sample-3pp.pdf">Download PDF</a>.</p>
+             </object> -->
+        <embed id="pdfcv" width="100%" height="880px" type="application/pdf" />
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-6">
+      <div class="card">
+        <div class="header col-lg-6">
+          <h4 class="title">Edit Profile</h4>
+        </div>
+        <div class="content">
+          <!-- (submit)='onSignIn(formSignIn)' -->
+          <form #formUpdate='ngForm'>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control border-input" placeholder="Name" name='name' [(ngModel)]="user.name" [readonly]='!isEdit'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Birth</label>
+                  <input type="date" class="form-control border-input" 
+                  placeholder="Birth" name="birth" 
+                  [disabled]='!isEdit' [(ngModel)]="user.birth">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label>Gender: </label>
+                <div class="form-group radio-inline">
+                  <label class="radio-inline">
+                    <input type="radio" name="gender" 
+                    [checked]='user.gender==="Men"' 
+                    value="Men"
+                    [disabled]='!isEdit'>Men </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="gender" 
+                    [checked]='user.gender==="Women"' 
+                    value="Women"
+                    [disabled]='!isEdit'>Women</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Adress</label>
+                  <input type="text" class="form-control border-input" 
+                  placeholder="Adress" [(ngModel)]='user.adress' 
+                  [disabled]='!isEdit' name='adress'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" class="form-control border-input" 
+                  placeholder="Email" [(ngModel)]='user.email' 
+                  [disabled]='!isEdit' name='email'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Điện thoại</label>
+                  <input type="text" class="form-control border-input" 
+                  placeholder="Điện thoại" [(ngModel)]='user.phone' 
+                  [disabled]='!isEdit' name='phone'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>User Name</label>
+                  <input type="text" class="form-control border-input" 
+                  placeholder="User Name" [(ngModel)]='user.username'
+                  [disabled]='!isEdit' name='username'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Pass Word</label>
+                  <input type="password" class="form-control border-input"
+                  placeholder="Pass Word" [(ngModel)]='user.password'
+                  [disabled]='!isEdit' name='password'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Point Test</label>
+                  <input type="number" class="form-control border-input" 
+                  [(ngModel)]="user.point"
+                  [disabled]='true' name='point'>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Time Spent</label>
+                  <input type="text" class="form-control border-input" 
+                  ngModel value="{{timeClock(user.timespent)}}"
+                  [disabled]='true' name='timespent'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Note: </label>
+                  <textarea rows="5" class="form-control border-input" 
+                  placeholder="Here can be your description"
+                  [disabled]='!isEdit' value="Mike">Result good</textarea>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="" class="btn btn-info btn-fill btn-wd" (click)='isEdit=!isEdit' [disabled]="isEdit">Edit</button>
+              <button type="submit" class="btn btn-info btn-fill btn-wd" (click)='Save()' [disabled]="!isEdit">Save</button>
+            </div>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

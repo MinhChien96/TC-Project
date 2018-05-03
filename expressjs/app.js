@@ -1,6 +1,7 @@
 const db = require('./api/entities');
 const bodyParser = require('body-parser');
 const express = require('express');
+var multer = require('multer');
 const path = require('path');
 const routes = require('./config/routes');
 var morgan = require('morgan');
@@ -27,10 +28,23 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
 });
+//upload cv
+var storage = multer.diskStorage({
+    // destino del fichero
+    destination: function (req, file, cb) {
+      cb(null, './uploads/')
+    },
+    // renombrar fichero
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+});
+
+var upload = multer({ storage: storage });
 
 
 verifyToken.initVerifyToken(passport);//xác nhận token trong req
-routes.initRoutes(app, express);//routes
+routes.initRoutes(app, express, upload);//routes
 
 
 var port = process.env.PORT || 3000;

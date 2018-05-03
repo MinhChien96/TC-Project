@@ -17,6 +17,9 @@ import { LoginService} from './service/login.service';
 import {AuthGuardService} from './auth/auth-guard.service';
 import {AuthService} from './auth/auth.service';
 import {IQuizService} from './auth/isQuiz.service';
+import{ IResultService} from './auth/IResult.service'
+import {AdminModule} from './admin/admin.module';
+import {IntervieweeService} from './service/interviewee.service';
 
 
 @NgModule({
@@ -27,16 +30,18 @@ import {IQuizService} from './auth/isQuiz.service';
     ResultComponent,
     ReviewComponent,
     TimeClock,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
+    AdminModule,
+    AppRoutingModule
   ],
-  providers: [QuizService, CookieService, LoginService, AuthService, AuthGuardService, IQuizService],
+  providers: [QuizService, CookieService, LoginService, AuthService, AuthGuardService, IQuizService, IResultService,
+  IntervieweeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

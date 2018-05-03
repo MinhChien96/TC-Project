@@ -1,0 +1,131 @@
+<div class="container-fluid" style="padding: 0px">
+  <div class="row" style="border: 1px rgb(228, 219, 219) solid;padding: 10px;">
+    <div class="col-lg-12 col-md-12">
+      <div class="col-lg-4">
+        <h4>Upload CV</h4>
+        <input class="btn btn-fill" type="file" value="Upload CV here"
+        (change)="fileChangeEvent($event)" type="file" id="file">
+      </div>
+      <div class="col-lg-8">
+        <div style="width: 100%;height: 400px;overflow: auto;background-color: rgb(212, 211, 211);"
+        class="card" title="View CV here">
+            <pdf-viewer [src]="pathPDF" 
+            [render-text]="true"
+            style="display: block;"
+            [original-size]="false"
+            >
+            </pdf-viewer>
+        </div>
+        <!-- <embed src="C:\fakepath\DCCT_TT_Cong_Nghiep.pdf" width="100%" height="400px" type="application/pdf" style="background-color: rgb(212, 211, 211)" class="card" title="View CV here"/> -->
+      </div>
+    </div>
+  </div>
+  <div class="row" style="border: 1px rgb(228, 219, 219) solid;padding: 10px;">
+    <div class="col-lg-4 col-md-4">
+      <h4>Information</h4>
+    </div>
+    <div class="col-lg-8 col-md-8">
+      <div class="card">
+        <div class="content">
+          <!-- (submit)='onSignIn(formSignIn)' -->
+          <form #formUpdate='ngForm'>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control border-input" placeholder="Name" name='name' [(ngModel)]="user.name">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Birth</label>
+                  <input type="date" class="form-control border-input" placeholder="Birth" name="birth" [(ngModel)]="user.birth">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label>Gender: </label>
+                <div class="form-group radio-inline">
+                  <label class="radio-inline">
+                    <input type="radio" name="gender" [(ngModel)]="user.gender" name="gender" value="Men">Men </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="gender" [(ngModel)]="user.gender" name="gender" value="Women">Women</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Adress</label>
+                  <input type="text" class="form-control border-input" placeholder="Adress" [(ngModel)]='user.adress' name='adress'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control border-input" placeholder="Email" [(ngModel)]='user.email' name='email'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Điện thoại</label>
+                  <input type="text" class="form-control border-input" placeholder="Điện thoại" [(ngModel)]='user.phone' name='phone'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>User Name</label>
+                  <input type="text" class="form-control border-input" placeholder="User Name" [(ngModel)]='user.username' name='username'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Pass Word</label>
+                  <input type="password" class="form-control border-input" placeholder="Pass Word" [(ngModel)]='user.password' name='password'>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Point Test</label>
+                  <input type="number" class="form-control border-input" [(ngModel)]="user.point" name='point' disabled>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Time Spent</label>
+                  <input type="text" class="form-control border-input" ngModel name='timespent' disabled>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Note: </label>
+                  <textarea rows="5" class="form-control border-input" placeholder="Here can be your description"
+                  [(ngModel)]="user.note" name='note'></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-info btn-fill btn-wd" [disabled]="false" (click)="upload()">Save</button>
+            </div>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
