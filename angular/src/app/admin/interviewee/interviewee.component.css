@@ -1,0 +1,12 @@
+*,label,input{
+    color: rgb(30, 30, 30)
+}
+::placeholder { 
+    color: rgb(121, 116, 110);
+}
+input:disabled {
+    color: #272424;
+}
+textarea:disabled {
+    color: #272424;
+}

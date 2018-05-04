@@ -1,5 +1,5 @@
 <div class="container-fluid" style="padding: 0px">
-  <div class="row" style="border: 1px rgb(228, 219, 219) solid;padding: 10px;">
+  <div class="row" style="border: 0px 1px rgb(228, 219, 219) solid;padding: 10px;">
     <div class="col-lg-12 col-md-12">
       <div class="col-lg-4">
         <h4>Upload CV</h4>
@@ -33,15 +33,35 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Name</label>
-                  <input type="text" class="form-control border-input" placeholder="Name" name='name' [(ngModel)]="user.name">
+                  <input type="text" class="form-control border-input" placeholder="Name" 
+                  name='name' required #txtname="ngModel"
+                  [(ngModel)]="user.name">
+                  <div *ngIf="txtname.invalid && (txtname.dirty || txtname.touched)"
+                  class="alert alert-danger">
+                    <div *ngIf="txtname.errors.required">
+                      Name is required.
+                    </div>
+                  </div>
                 </div>
+                
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Birth</label>
-                  <input type="date" class="form-control border-input" placeholder="Birth" name="birth" [(ngModel)]="user.birth">
+                  <input type="date" class="form-control border-input" placeholder="Birth" 
+                  name="birth" [(ngModel)]="user.birth" #dtpbirth="ngModel"
+                  required >
+                  <div *ngIf="dtpbirth.invalid && (dtpbirth.dirty || dtpbirth.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="dtpbirth.errors.required">
+                      BirthDay is required.
+                    </div>
+                  </div>
+                  <div class="alert alert-danger" *ngIf="dtpbirth.valid&&validateDate(dtpbirth)">
+                    BirthDay can not be the future.
+                  </div>
                 </div>
               </div>
             </div>
@@ -50,9 +70,9 @@
                 <label>Gender: </label>
                 <div class="form-group radio-inline">
                   <label class="radio-inline">
-                    <input type="radio" name="gender" [(ngModel)]="user.gender" name="gender" value="Men">Men </label>
+                    <input type="radio" name="gender" required [(ngModel)]="user.gender" name="gender" value="Men">Men </label>
                   <label class="radio-inline">
-                    <input type="radio" name="gender" [(ngModel)]="user.gender" name="gender" value="Women">Women</label>
+                    <input type="radio" name="gender" required [(ngModel)]="user.gender" name="gender" value="Women">Women</label>
                 </div>
               </div>
             </div>
@@ -60,7 +80,15 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Adress</label>
-                  <input type="text" class="form-control border-input" placeholder="Adress" [(ngModel)]='user.adress' name='adress'>
+                  <input type="text" class="form-control border-input" placeholder="Adress" 
+                  [(ngModel)]='user.adress' name='adress'
+                  required #txtadress="ngModel">
+                </div>
+                <div *ngIf="txtadress.invalid && (txtadress.dirty || txtadress.touched)"
+                  class="alert alert-danger">
+                    <div *ngIf="txtadress.errors.required">
+                      Adress is required.
+                    </div>
                 </div>
               </div>
             </div>
@@ -68,7 +96,18 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="email" class="form-control border-input" placeholder="Email" [(ngModel)]='user.email' name='email'>
+                  <input type="email" class="form-control border-input" placeholder="Email" 
+                  [(ngModel)]='user.email' name='email'
+                  required email #txtemail="ngModel">
+                  <div *ngIf="txtemail.invalid && (txtemail.dirty || txtemail.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="txtemail.errors.required">
+                      Email is required.
+                    </div>
+                    <div *ngIf="txtemail.errors.email">
+                      Please input a valid email.
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,7 +115,19 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Điện thoại</label>
-                  <input type="text" class="form-control border-input" placeholder="Điện thoại" [(ngModel)]='user.phone' name='phone'>
+                  <input type="text" class="form-control border-input" placeholder="Điện thoại" 
+                  [(ngModel)]='user.phone' name='phone'
+                  required #txtphone="ngModel" pattern='(09|01[2|6|8|9])+([0-9]{8})\b' > <!--pattern='/(09|01[2|6|8|9])+([0-9]{8})\b/g'-->
+                  <div *ngIf="txtphone.invalid && (txtphone.dirty || txtphone.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="txtphone.errors.required">
+                      Phone number is required.
+                    </div>
+                    <div *ngIf="txtphone.errors?.pattern">
+                      Please input a valid phone number.
+                    </div>
+                    <!-- <code>{{test(txtphone)}}</code> -->
+                  </div>
                 </div>
               </div>
             </div>
@@ -84,7 +135,19 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label>User Name</label>
-                  <input type="text" class="form-control border-input" placeholder="User Name" [(ngModel)]='user.username' name='username'>
+                  <input type="text" class="form-control border-input" placeholder="User Name" 
+                  [(ngModel)]='user.username' name='username'
+                  pattern="[a-zA-Z]*" #txtusername="ngModel"
+                  required>
+                  <div *ngIf="txtusername.invalid && (txtusername.dirty || txtusername.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="txtusername.errors.required">
+                      UserName is required.
+                    </div>
+                    <div *ngIf="txtusername.errors.pattern">
+                      UserName is [a-z,A-Z]
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -92,7 +155,18 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Pass Word</label>
-                  <input type="password" class="form-control border-input" placeholder="Pass Word" [(ngModel)]='user.password' name='password'>
+                  <input type="text" class="form-control border-input" placeholder="Pass Word" 
+                  [(ngModel)]='user.password' name='password'
+                  #txtpassword="ngModel" required pattern="[a-zA-Z]*">
+                  <div *ngIf="txtpassword.invalid && (txtpassword.dirty || txtpassword.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="txtpassword.errors.required">
+                      Password is required.
+                    </div>
+                    <div *ngIf="txtpassword.errors.pattern">
+                      Password is [a-z,A-Z].
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -120,7 +194,7 @@
               </div>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-info btn-fill btn-wd" [disabled]="false" (click)="upload()">Save</button>
+              <button type="submit" class="btn btn-info btn-fill btn-wd" [disabled]="formUpdate.invalid" (click)="upload()">Save</button>
             </div>
             <div class="clearfix"></div>
           </form>
