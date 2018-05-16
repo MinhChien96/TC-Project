@@ -18,31 +18,31 @@ export class IntervieweeService {
   }
   headers: Headers;
   async getUerById(id){
-    let res = await this.http.get('http://localhost:3000/api/user/'+id, { headers: this.headers }).toPromise();
+    let res = await this.http.get('https://tcquiz.herokuapp.com/api/user/'+id, { headers: this.headers }).toPromise();
     return res.json();
   }
 
   async upLoadCv(formData){
-    let res = await this.http.post('http://localhost:3000/api/user/upload/', formData, { headers: new Headers(
+    let res = await this.http.post('https://tcquiz.herokuapp.com/api/user/upload/', formData, { headers: new Headers(
       {'Authorization': 'bearer ' + this.cookieService.get('token')})})
       .toPromise();
     return res.json();
   }
 
   async createInter(data){
-    let res = await this.http.post('http://localhost:3000/api/user/signup', data, { headers: this.headers})
+    let res = await this.http.post('https://tcquiz.herokuapp.com/api/user/signup', data, { headers: this.headers})
     .toPromise();
     return res.json();
   }
 
   async updateInter(data){
-    let res = await this.http.post('http://localhost:3000/api/user/update', data, { headers: this.headers})
+    let res = await this.http.post('https://tcquiz.herokuapp.com/api/user/update', data, { headers: this.headers})
     .toPromise();
     return res.json();
   }
 
   async getCVByName(filename){
-    let res = await this.http.get('http://localhost:3000/api/user/getcv/quidinhvietcode.pdf', { headers: this.headers,responseType: ResponseContentType.Blob})
+    let res = await this.http.get('https://tcquiz.herokuapp.com/api/user/getcv/quidinhvietcode.pdf', { headers: this.headers,responseType: ResponseContentType.Blob})
     .map(res=>{
       //console.log(res);
       return new Blob([res.blob()], { type: 'application/pdf' });
@@ -50,7 +50,7 @@ export class IntervieweeService {
   }
   
   async deleteInter(arrID){
-    let res = await this.http.post('http://localhost:3000/api/user/delete', arrID, { headers: this.headers})
+    let res = await this.http.post('https://tcquiz.herokuapp.com/api/user/delete', arrID, { headers: this.headers})
     .toPromise();
     return res.json();
   }
