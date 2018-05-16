@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "chien8496",
-    "database": "quiz",
-    "host": "localhost",
+    "username": "sql12238234",
+    "password": "b2YFHLeGem",
+    "database": "sql12238234",
+    "host": "sql12.freemysqlhosting.net",
     "port": "3306",
     "dialect": "mysql",
     "logging": true
