@@ -7,6 +7,19 @@
           <h4 class="title">Result Quiz</h4>
           <!-- <p class="category">Here is a subtitle for this table</p> -->
         </div>
+        <div class="col-lg-12">
+          <br><br>
+          <div class="col-lg-6">
+              <button (click)="searchName(nameSerch.value)" style="width: 100px;">Search Name</button>
+              <input type="text" placeholder="Enter name" #nameSerch >
+          </div>
+          <div class="col-lg-6">
+              <button (click)="rankking(rank.value)" [disabled]="(rank.value=='')" style="width: 100px;">Filter</button> 
+              <input type="number" placeholder="Enter name" #rank min="0">
+              <!-- <code>{{rank.value==''|json}}</code> -->
+          </div>
+          <br><br>
+        </div>
         <div class="content table-responsive table-full-width">
           <table class="table table-striped">
             <thead>
@@ -15,11 +28,18 @@
                 <th *ngFor="let cell of titleTable">{{ cell }}</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="tableData!=''">
               <tr *ngFor="let row of tableData">
                 <td>
                   <input type="checkbox" (click)="select(row['idacc'])">
                 </td>
+                <!-- <td>{{row['idacc']}}</td>
+                <td>{{row['name']}}</td>
+                <td>{{row['birth']}}</td>
+                <td>{{row['adress']}}</td>
+                <td>{{row['gender']}}</td>
+                <td>{{row['point']}}</td>
+                <td>{{row['timespent']}}</td> -->
                 <td *ngFor="let cell of row | keys">{{cell!='timespent' ? row[cell] : timeClock(row[cell])}}</td>
                 <!-- <td>
                                  <button class="ti-pencil"></button>

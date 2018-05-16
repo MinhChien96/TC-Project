@@ -1,6 +1,21 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-2">
+      <div style="padding:50px 0px 20px 70px;">
+        <div *ngFor="let ques of arrAnwser;let i = index" class="row" style="margin: 2px 0px;">
+          <a (click)="selectQues(i+1)">Câu {{i+1}} </a>
+          <!-- [style.color]="i==0 ? 'red' : 'black'" -->
+          <i [class]="ques.idanwser!='' ? 'glyphicon glyphicon-ok':''"></i>
+        </div>
+      </div>
+      <div class="row" style="padding: 0px 60px">
+          <button class="btn btn-info" (click)="checkResult()">Send result</button>
+      </div>
+      <!-- <div style="padding:20px 0px 0px 20px; " class="col-lg-5">
+          <div *ngFor="let ques of arr;let i = index" [disabled]="true" class="row" style="margin: 10px 0px;">
+            <div *ngIf="(i>=9)">Câu {{ques}}</div>
+          </div>
+        </div> -->
     </div>
     <div class="col-sm-8">
       <h4>
@@ -20,7 +35,6 @@
         </div>
         <div class="panel-body">
           <div *ngFor="let item of ques.anwsers">
-
             <label for="item_{{item.content}}">
               <h4>
                 <input id="item_{{item.content}}" type="radio" name="contentAnwser" [value]="item.idanwser" [(ngModel)]="selectAnwser">{{item.content}}

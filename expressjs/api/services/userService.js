@@ -108,3 +108,17 @@ exports.delete = async (arrID,res)=>{
         res.json({success:false,message:"Cannot delete"});
     }
 }
+
+exports.updatePoint = async (idacc,point,timespent)=>{
+    try {
+        let user = await db.account.findOne({
+            where:{idacc:idacc}
+        });
+        user.point = point;
+        user.timespent = timespent;
+        await user.save();
+        return true;
+    } catch (error) {
+        return false;
+    }
+}

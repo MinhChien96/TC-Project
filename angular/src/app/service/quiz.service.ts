@@ -54,7 +54,7 @@ export class QuizService {
   // }
 
   async checkResult(arrAnwser) {
-    let res = await this.http.post('http://localhost:3000/api/question/checkResult',arrAnwser ,{ headers: this.headers }).toPromise();
+    let res = await this.http.post('http://localhost:3000/api/question/checkResult/',arrAnwser ,{ headers: this.headers }).toPromise();
     // console.log(res);
     // console.log(res.json());
     return res.json();

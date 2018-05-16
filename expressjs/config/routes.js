@@ -16,8 +16,8 @@ exports.initRoutes = function (app, express,upload) {
 
     //user routes
     var userRoutes = express.Router();
-    userRoutes.get('/getcv/:filename',userController.getCv);
     apiRoutes.use('/user', userRoutes);
+    userRoutes.get('/getcv/:filename',userController.getCv);
     userRoutes.post('/login', userController.login);
     userRoutes.get('/:id', [requiredAuth, auth.isAmin], userController.getUserById);
     userRoutes.get('/', [requiredAuth, auth.isAmin], userController.getAllUser); //get all user - admin
@@ -33,7 +33,10 @@ exports.initRoutes = function (app, express,upload) {
     apiRoutes.use('/question', questionRouters); //xác nhận người dùng
     questionRouters.get('/', requiredAuth, questionController.getRdQues);
     questionRouters.post('/checkResult',requiredAuth, questionController.checkResult);
-
+    
+    var testTransactions = express.Router();
+    apiRoutes.use('/transactions',testTransactions);
+    testTransactions.post('/',questionController.transactionCreate)
     // Set url for API group routes
     app.use('/api', apiRoutes);
 }

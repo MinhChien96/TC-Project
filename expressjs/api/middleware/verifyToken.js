@@ -12,7 +12,7 @@ exports.initVerifyToken = function (passport) {
         if(jwt_payload.exp<date){
             next("token het han",false);
         }
-        userService.findById(jwt_payload.id).then(user=>{
+            userService.findById(jwt_payload.id).then(user=>{
             if(user.islogin==0){
                 let err = "token sai";
                 next(err);

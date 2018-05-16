@@ -50,8 +50,12 @@ module.exports = (sequelize, DataTypes) => {
             type:DataTypes.STRING
         },
         phone: DataTypes.STRING,
-    },{freezeTableName: true,timestamps: false});
+    },{freezeTableName: true,timestamps: false});//timestamps: false => don't add the timestamp attributes (updatedAt, createdAt)
+    //freezeTableName: true => vô hiệu hóa việc sửa đổi tên bảng
+    //mặc định các table sẽ đc thêm s(số nhiều) ví dụ: accounts
 
+    //mã hóa mật khẩu trước khi insert db
+    //using bcryptjs mã hóa
     account.beforeCreate((account, options) => {
         return new Promise((resolve, reject)=>{
             cryptPassword(account.password,(err,hash)=>{
@@ -61,7 +65,9 @@ module.exports = (sequelize, DataTypes) => {
             })
         })
       });
-
+    
+    //mở rộng phương thức cho các đối tượng
+    //so sánh mật khẩu
     account.prototype.comparePassword = function(passw){
         //console.log(this.password);
         //console.log(this);

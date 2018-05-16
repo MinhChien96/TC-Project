@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../service/quiz.service';
 import { Router } from '@angular/router'
 import{IntervieweeService} from "../../service/interviewee.service";
-
+import * as _ from "lodash";
 @Component({
     selector: 'app-quiz',
     templateUrl: './quiz.component.html',
@@ -16,6 +16,7 @@ export class QuizComponent implements OnInit {
     arrSelect = [];
     titleTable = [];
     tableData= [];
+    tableTemp = [];
     ngOnInit() {
         this.titleTable = ['ID', 'Name', 'Birth', 'Adress','Gender','Point', 'Time Spent'];
         this.getUser();
@@ -26,6 +27,7 @@ export class QuizComponent implements OnInit {
             if(result.success){
                 this.tableData = result.data;
                 // console.log(this.tableData);
+                this.tableTemp = result.data;
             }
             else{
                 throw Error('Only admin can use api');
@@ -62,5 +64,23 @@ export class QuizComponent implements OnInit {
                 console.log(err);
             });
         }
+    }
+
+    searchName(name){
+        if(name == "")this.tableData = this.tableTemp;
+        else{  
+            let res = _.filter(this.tableTemp,val=>{
+                let temp = _.toLower(val.name);
+                let res = (temp.search(_.toLower(name)) != -1);
+                return res;
+            })
+            this.tableData = res;
+        }
+    }
+
+    rankking(top){
+        let temp = _.orderBy(this.tableTemp,['point'],['desc']);
+        this.tableData = _.slice(temp,0,top);
+        
     }
 }

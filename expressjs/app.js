@@ -13,14 +13,14 @@ var verifyToken = require('./api/middleware/verifyToken');
 const app = express();
 app.set('view engine', 'ejs');
 
-//middware để nhận dữ liệu từ body req, có cái này mới sử dụng ddc req.body
+//middware để nhận dữ liệu từ body req,
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));//log mọi request
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());//khởi tạo passport
 
-// Enable CORS from client-side, cách khắc phục lỗi hôm trước ae không test api đc
+// Enable CORS from client-side,
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
@@ -30,11 +30,9 @@ app.use((req, res, next) => {
 });
 //upload cv
 var storage = multer.diskStorage({
-    // destino del fichero
     destination: function (req, file, cb) {
       cb(null, './uploads/')
     },
-    // renombrar fichero
     filename: function (req, file, cb) {
       cb(null, file.originalname);
     }
@@ -57,5 +55,5 @@ app.listen(port,function(){
 //             console.log("Server running is port: ",port);
 //         });
 //    })
-//   });
+// });
 
