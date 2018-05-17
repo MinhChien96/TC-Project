@@ -38,7 +38,7 @@ export class IntervieweeComponent implements OnInit {
         if (result.data == null) throw new Error("Can not find user");
         this.user = result.data;
         if(result.data.cv)
-        this.urlPDF = "http://localhost:3000/api/user/getcv/"+result.data.cv;
+        this.urlPDF = "https://tcquiz.herokuapp.com/api/user/getcv/"+result.data.cv;
       }
       // this.intervieweeService.getCVByName("chien").subscribe(response=>{
       //   var file = new Blob([response], {type: 'application/pdf'});
