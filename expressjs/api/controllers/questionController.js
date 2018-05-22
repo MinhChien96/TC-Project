@@ -85,6 +85,19 @@ exports.checkResult = async function (req, res) {
 }
 
 //for learn Transactions
+exports.findQuesBySub = (req,res)=>{
+    let idsub = req.params.idsub;
+    var response = {};
+    return questionService.findQuesBySub(idsub)
+    .then(result=>{
+        response={success:true,data:result};
+        res.json(response);
+    })
+    .catch(err=>{
+        response = {success:false,data:null,message: 'Cannot conect to DB'};
+        res.json(response);
+    })
+}
 
 exports.transactionCreate = (req,res)=>{
     return questionService.createSubject(req,res);

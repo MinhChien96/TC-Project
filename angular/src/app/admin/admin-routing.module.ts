@@ -6,13 +6,13 @@ import {QuestionComponent} from './question/question.component';
 import {IntervieweeComponent} from './interviewee/interviewee.component';
 import {AddIntervieweeComponent} from './add-interviewee/add-interviewee.component';
 import { AuthGuardService as AuthGuard } from '../auth/auth-guard.service';
-
+import{IsAdminService} from '../auth/isAdmin.service';
 
 const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
-        canActivate: [AuthGuard],
+        canActivate: [IsAdminService],
         children: [
             { path: '', redirectTo: 'admin', pathMatch: 'full' },
             { path: 'resultquiz', component :QuizComponent},

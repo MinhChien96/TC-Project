@@ -82,7 +82,7 @@ export class QuizComponent implements OnInit {
   async checkResult() {
     try {
       //console.log(this.arrAnwser);alert("waiting");
-      this.cookieService.set('arrAnwser', JSON.stringify(this.arrAnwser), Date.now() + 86400000);
+      // this.cookieService.set('arrAnwser', JSON.stringify(this.arrAnwser), Date.now() + 86400000);
       this.arrAnwser.push({timespent:this.timeSpent});
       let result = await this.quizService.checkResult(this.arrAnwser);
       //console.log(JSON.stringify(result));
@@ -96,5 +96,8 @@ export class QuizComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+  ngOnDestroy(){
+    
   }
 }

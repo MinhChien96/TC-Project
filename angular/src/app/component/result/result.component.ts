@@ -19,7 +19,7 @@ export class ResultComponent implements OnInit {
     this.result = JSON.parse(this.cookieService.get('result')).point;
     this.timeSpent = JSON.parse(this.cookieService.get('result')).timeSpent;
 
-    console.log(JSON.parse(this.cookieService.get('result')));
+    // console.log(JSON.parse(this.cookieService.get('result')));
 
     // this.traLois = JSON.parse(this.result[1]);
 
