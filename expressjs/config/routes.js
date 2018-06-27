@@ -2,7 +2,6 @@ const passport = require('passport');
 const requiredAuth = passport.authenticate('jwt', {
     session: false
 });
-//routes định hướng cho app
 
 const userController = require('../api/controllers/userController');
 const siteController = require('../api/controllers/homePage');

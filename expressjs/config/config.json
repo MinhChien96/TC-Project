@@ -1,8 +1,8 @@
 {
   "production": {
-    "username": "sql12238234",
-    "password": "b2YFHLeGem",
-    "database": "sql12238234",
+    "username": "sql12240681",
+    "password": "juewjbLB6L",
+    "database": "sql12240681",
     "host": "sql12.freemysqlhosting.net",
     "port": "3306",
     "dialect": "mysql",
