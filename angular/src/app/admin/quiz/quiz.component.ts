@@ -79,8 +79,11 @@ export class QuizComponent implements OnInit {
     }
 
     rankking(top){
-        let temp = _.orderBy(this.tableTemp,['point'],['desc']);
-        this.tableData = _.slice(temp,0,top);
+        if(top=="")this.tableData = this.tableTemp;
+        else{
+            let temp = _.orderBy(this.tableTemp,['point'],['desc']);
+            this.tableData = _.slice(temp,0,top);
+        }
         
     }
 }

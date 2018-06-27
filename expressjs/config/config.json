@@ -1,9 +1,9 @@
 {
-  "development": {
-    "username": "root",
-    "password": "chien8496",
-    "database": "quiz",
-    "host": "localhost",
+  "production": {
+    "username": "sql12240681",
+    "password": "juewjbLB6L",
+    "database": "sql12240681",
+    "host": "sql12.freemysqlhosting.net",
     "port": "3306",
     "dialect": "mysql",
     "logging": true
@@ -13,10 +13,10 @@
     "storage": ":memory:",
     "logging": false
   },
-  "production": {
-    "username": "tceas_dev",
-    "password": "q10Fz#DggdT#UN$d3",
-    "database": "tceas_dev",
+  "development": {
+    "username": "root",
+    "password": "chien8496",
+    "database": "quiz",
     "host": "localhost",
     "port": "3306",
     "dialect": "mysql",

@@ -20,7 +20,7 @@ import {IQuizService} from './auth/isQuiz.service';
 import{ IResultService} from './auth/IResult.service'
 import {AdminModule} from './admin/admin.module';
 import {IntervieweeService} from './service/interviewee.service';
-
+import {QuestionService} from './service/question.service';
 
 @NgModule({
   declarations: [
@@ -40,8 +40,9 @@ import {IntervieweeService} from './service/interviewee.service';
     AdminModule,
     AppRoutingModule
   ],
-  providers: [QuizService, CookieService, LoginService, AuthService, AuthGuardService, IQuizService, IResultService,
-  IntervieweeService],
+  providers: [QuizService, CookieService, LoginService, AuthService,
+    AuthGuardService, IQuizService, IResultService, QuestionService,
+    IntervieweeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

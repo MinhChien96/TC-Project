@@ -1,1 +1,70 @@
-<h2>Questions</h2>
+<div class="container-fluid">
+    <div class="row" style="background-color: white;border-radius: 5px;">
+        <div class="col-md-12" style="margin: 10px;">
+            <div class="row header">
+                <h4 style="font-weight: 500;">Add Question</h4>
+            </div>
+        </div>
+        <div style="font-size: 12px">
+            <!--Content-->
+            <div class="col-lg-12" style="font-size: 17px">
+                <label style="font-weight: 700;">Select Subject:</label>
+                <select name="" [(ngModel)]="selectSub" (change)="changeSub()">
+                    <option value="{{sub.idsub}}" *ngFor="let sub of arrSub">{{sub.namesub}}</option>
+                </select>
+                <br>
+                <button style="margin: 15px;width: 100px;font-size: 12px;font-weight: 700">Add New</button>
+            </div>
+            <div class="col-lg-12" style="overflow-y: scroll;">
+                <div class="content table-responsive table-full-width" style="max-height: 400px;">
+                    <table style="padding: 5px;" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Content</th>
+                                <th>Level</th>
+                                <th>Type</th>
+                                <th>Detail</th>
+                            </tr>
+                        </thead>
+                        <!-- <code>{{arrQues|json}}</code> -->
+                        <tbody>
+                            <tr *ngFor="let ques of arrQues">
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>{{ques.idquestion}}</td>
+                                <td>{{ques.content}}</td>
+                                <td>{{ques.level}}</td>
+                                <td>{{ques.type}}</td>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-5" style="overflow: scroll;margin:15px">
+                <div class="content table-responsive table-full-width">
+                    <table style="padding: 5px;" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Content</th>
+                                <th>Level</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="ti-trash" (click)="delete()"></button>
+    <button class="ti-reload" (click)="reload()"></button>
+</div>

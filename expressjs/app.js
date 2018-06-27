@@ -13,12 +13,11 @@ var verifyToken = require('./api/middleware/verifyToken');
 const app = express();
 app.set('view engine', 'ejs');
 
-//middware để nhận dữ liệu từ body req,
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(morgan('dev'));//log mọi request
+app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(passport.initialize());//khởi tạo passport
+app.use(passport.initialize());
 
 // Enable CORS from client-side,
 app.use((req, res, next) => {
@@ -41,7 +40,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-verifyToken.initVerifyToken(passport);//xác nhận token trong req
+verifyToken.initVerifyToken(passport);
 routes.initRoutes(app, express, upload);//routes
 
 

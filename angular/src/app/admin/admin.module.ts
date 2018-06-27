@@ -12,7 +12,7 @@ import {KeysPipe} from '../pipe/keyArray';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddIntervieweeComponent } from './add-interviewee/add-interviewee.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-
+import {IsAdminService} from '../auth/isAdmin.service';
 
 @NgModule({
     imports: [
@@ -31,6 +31,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
         QuestionComponent,
         KeysPipe,
         AddIntervieweeComponent,
-    ]
+    ],
+    providers: [IsAdminService]
 })
 export class AdminModule {}

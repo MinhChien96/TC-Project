@@ -31,7 +31,7 @@ export class QuizService {
   //   'Authorization': 'bearer '+this.authToken,
   // })
   async getAll() {
-    let res = await this.http.get('http://localhost:3000/api/question/', { headers: this.headers }).toPromise();
+    let res = await this.http.get('https://tcquiz.herokuapp.com/api/question/', { headers: this.headers }).toPromise();
     // console.log(res);
     // console.log(res.json());
     return res.json();
@@ -48,19 +48,19 @@ export class QuizService {
 
   // public getAll(): any {
   //   console.log(this.http);
-  //   return this.http.get('http://localhost:3000/api/question', {
+  //   return this.http.get('https://tcquiz.herokuapp.com/api/question', {
   //     headers: this.createAuthorizationHeader()
   //   }).toPromise();
   // }
 
   async checkResult(arrAnwser) {
-    let res = await this.http.post('http://localhost:3000/api/question/checkResult/',arrAnwser ,{ headers: this.headers }).toPromise();
+    let res = await this.http.post('https://tcquiz.herokuapp.com/api/question/checkResult/',arrAnwser ,{ headers: this.headers }).toPromise();
     // console.log(res);
     // console.log(res.json());
     return res.json();
   }
   async getAllInter(){
-    let res = await this.http.get('http://localhost:3000/api/user/' ,{ headers: this.headers }).toPromise();
+    let res = await this.http.get('https://tcquiz.herokuapp.com/api/user/' ,{ headers: this.headers }).toPromise();
     return res.json();
   }
 }

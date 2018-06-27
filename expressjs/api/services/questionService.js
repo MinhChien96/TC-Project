@@ -28,6 +28,16 @@ exports.findAnwser = idquestion => {
     })
 }
 
+exports.findQuesBySub = (idsub)=>{
+    return db.question.findAll({
+        where:{idsub:idsub},
+        include:[
+            {
+                model:db.anwser
+            }
+        ]
+    })
+}
 
 //for learn transaction
 exports.createSubject = (req, res) => {

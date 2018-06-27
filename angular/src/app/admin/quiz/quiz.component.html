@@ -14,8 +14,9 @@
               <input type="text" placeholder="Enter name" #nameSerch >
           </div>
           <div class="col-lg-6">
-              <button (click)="rankking(rank.value)" [disabled]="(rank.value=='')" style="width: 100px;">Filter</button> 
-              <input type="number" placeholder="Enter name" #rank min="0">
+              <button (click)="rankking(rank.value)" style="width: 100px;">Filter</button> 
+              <input type="number" placeholder="Enter top" #rank min="0">
+              <!-- {{rank.value|json}} -->
               <!-- <code>{{rank.value==''|json}}</code> -->
           </div>
           <br><br>
